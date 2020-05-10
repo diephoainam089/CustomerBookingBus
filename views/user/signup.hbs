@@ -1,0 +1,74 @@
+<div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-2">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <form action="/user/signup" method="POST">
+                    <h3>{{__ "Registration Form"}}</h3>
+                    {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{#each messages}}
+                        <strong>{{this}}</strong>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                    <div class="input-group">
+                        <input class="input--style-2" type="text" placeholder="{{__ "Full Name"}}" name="fullName" id="fullName">
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input class="input--style-2 js-datepicker" type="text" placeholder="{{__ "Date of birth"}}"
+                                    name="birthday" onfocus='onFocus(this)' onblur='onBlur(this)' id="birthday" name="birthday">
+                                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input class="input--style-2" type="text" placeholder="{{__ "Email"}}" id="email" name="email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-6">
+                            <div class="input-group">
+                                <input class="input--style-2" type="text" placeholder="{{__ "Password"}}"
+                                    name="password" id="password">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group">
+                                <input class="input--style-2" type="text" placeholder="{{__ "Confirm Password"}}"
+                                    name="confirmPass" id="confirmPass">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input class="input--style-2" type="text" placeholder="{{__ "Phone Number"}}"
+                                    name="phoneNum" id="phoneNum">
+                            </div>
+                        </div>
+                    </div>
+                    <input class="input--style-2" type="hidden" value={{csrfToken}} name="_csrf">
+                    <div class="p-t-30">
+                        <button class="btn btn--radius btn--green" type="submit">Next</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onFocus(ip) {
+        ip.type = 'date'
+    }
+    function onBlur(ip) {
+        ip.type = 'text'
+    }
+</script>

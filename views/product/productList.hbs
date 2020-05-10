@@ -1,0 +1,318 @@
+{{> header}}
+<div class="container">
+    <section class="row pt-10">
+        <div class="col-12">
+            <div class='booking-form'>
+                <form action="/product/product-search" method="post">
+
+                    <div class='row background {{#if hideSearchBar}} d-none {{/if}}'>
+                        <div class='col-md-3'>
+                            <div class="form-group inputNoIcon">
+                                <select class="departChosen custom_input form-control" id="departure" name="departure">
+                                    {{#each departures}}
+                                    <option value="{{this}}">{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class='col-md-3'>
+                            <div class="form-group inputNoIcon">
+                                <select class="destinaChosen custom_input_middle form-control" id="destination"
+                                    name="destination">
+                                    {{#each destinations}}
+                                    <option value="{{this}}">{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class='col-md-3'>
+                            <div class='form-group inputWithIcon'>
+                                <input data-date-format="yyyy-mm-dd" id="departDate" name="departDate"
+                                    class='custom_input_middle form-control departDate' type='text'
+                                    placeholder='{{__ "Departure date"}}' value="" data-provide="datepicker" readonly
+                                    required />
+                                <i class="fa fa-calendar icn"></i>
+                            </div>
+                        </div>
+                        <div class='col-md-3'>
+                            <div class='form-btn'>
+                                <button type='submit' class='custom_btn_submit submit-btn'>
+                                    {{__ "Find tickets"}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </section>
+    {{#if emptyList}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title text-center">{{__ "Not found trip"}}</div>
+            </div>
+            <div class="col-md-12 text-center">
+                <img class="image-not-found"
+                    src="https://storage.googleapis.com/fe-production/images/route-no-schedule.png"
+                    alt="route-not-found">
+            </div>
+        </div>
+    </div>
+
+    {{else}}
+    <section class="row">
+        <div class="col-md-3">
+            {{!-- Filter by price --}}
+            <div class="productcard filterform {{#if hideSearchBar}} m-t-10 {{/if}}">
+                <div>
+                    <h5> {{__ "Filter by price range"}} </h5>
+                </div>
+                <div id="rangeBox row">
+                    <form action="/product/filterPrice" method="post">
+                        <div id="sliderBox">
+                            <input type="range" id="slider0to50" step="1" min="0" max="10">
+                            <input type="range" id="slider51to100" step="1" min="10" max="20">
+                        </div>
+                        <div id="inputRange">
+                            <input type="number" step="1" min="0" max="10" placeholder="Min" id="min" name="min">
+                            <input type="number" step="1" min="10" max="20" placeholder="Max" id="max" name="max">
+                        </div>
+                        <div class="p-l-2"><button class="btn btn-primary" style="width: 100%"
+                                type="submit">{{__ "Filter"}}</button></div>
+                    </form>
+                </div>
+            </div>
+
+            {{!-- Filter by seat --}}
+            <div class="productcard filterform {{#if hideSearchBar}} m-t-10 {{/if}}">
+                <div>
+                    <h5> {{__ "Filter by available seat"}} </h5>
+                </div>
+                <div id="rangeBox row">
+                    <form action="/product/filterSeat" method="post">
+                        <div id="sliderBox">
+                            <input type="range" id="slider0to6" step="1" min="1" max="6">
+                            <input type="range" id="slider7to12" step="1" min="7" max="12">
+                        </div>
+                        <div id="inputRangeSeat">
+                            <input type="number" step="1" min="1" max="6" placeholder="Min" id="minSeat" name="minSeat">
+                            <input type="number" step="1" min="7" max="12" placeholder="Max" id="maxSeat" name="maxSeat">
+                        </div>
+                        <div class="p-l-2"><button class="btn btn-primary" style="width: 100%"
+                                type="submit">{{__ "Filter"}}</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 {{#if hideSearchBar}} m-t-10 {{/if}}">
+            <div class="productcard">
+                <div class="d-flex justify-content-sm-around align-items-center flex-row">
+
+                    <a href="/product/increaseP" class="btn customBtn" type="button" style="cursor: pointer">
+                        {{__ "Price increasing"}}
+                    </a>
+
+                    <a href="/product/decreaseP" class="btn customBtn" type="button" style="cursor: pointer">
+                        {{__ "Price descending"}}
+                    </a>
+
+                    <a href="/product/earliest" class="btn customBtn" type="button" style="cursor: pointer">
+                        {{__ "The earliest hour"}}
+                    </a>
+
+                    <a href="/product/latest" class="btn customBtn" type="button" style="cursor: pointer">
+                        {{__ "The latest hour"}}
+                    </a>
+                </div>
+            </div>
+            {{#each products}}
+            {{#each this }}
+            <div id="ticket-v2CPGqCRCusAkaAjIzIgIxNTCqjaIBOgoyOS0wMi0yMDIwSB1QyQM {{this._doc.userGroup}}"
+                class="TicketWrapper__TicketContainer-unfwwx-0 productcard">
+                <div class="TicketPC__Container-sc-1mxgwjh-0 eelEoa">
+                    <div class="ticket TicketPC__BodyFlex-sc-1mxgwjh-1 productcontainer">
+                        <img class="image" src="../images/{{this._doc.imagePath}}" />
+                        <div class="TicketPC__RightBody-sc-1mxgwjh-3 productinfo">
+                            <div class="TicketPC__TripInfo-sc-1mxgwjh-5 tripContent">
+                                <div class="bus-info">
+                                    <div class="bus-name">{{this._doc.title}} - {{this._doc.to}}</div>
+                                    <div class="bus-rating"><i aria-label="icon: star" class="anticon anticon-star">
+                                            <svg viewBox="64 64 896 896" focusable="false" style="display: none"
+                                                class="" data-icon="star" width="1em" height="1em" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z">
+                                                </path>
+                                            </svg></i><span style="display: none">4.5</span></div>
+                                    <div class="bus-review">• {{this._doc.reviews.length}} {{__ "reviews"}}</div>
+                                </div>
+                                <div class="seat-type">{{this._doc.codeBus}}</div>
+                                <div class="from-to"><svg class="TicketPC__LocationRouteSVG-sc-1mxgwjh-4 iGMGqV"
+                                        xmlns="http://www.w3.org/2000/svg" width="14" height="74" viewBox="0 0 14 74">
+                                        <path fill="none" stroke="#787878" stroke-linecap="round" stroke-width="2"
+                                            stroke-dasharray="0 7" d="M7 13.5v46"></path>
+                                        <g fill="none" stroke="#484848" stroke-width="3">
+                                            <circle cx="7" cy="7" r="7" stroke="none"></circle>
+                                            <circle cx="7" cy="7" r="5.5"></circle>
+                                        </g>
+                                        <path
+                                            d="M7 58a5.953 5.953 0 0 0-6 5.891 5.657 5.657 0 0 0 .525 2.4 37.124 37.124 0 0 0 5.222 7.591.338.338 0 0 0 .506 0 37.142 37.142 0 0 0 5.222-7.582A5.655 5.655 0 0 0 13 63.9 5.953 5.953 0 0 0 7 58zm0 8.95a3.092 3.092 0 0 1-3.117-3.06 3.117 3.117 0 0 1 6.234 0A3.092 3.092 0 0 1 7 66.95z"
+                                            fill="#787878"></path>
+                                    </svg>
+                                    <div class="from-to-content">
+                                        <div class="content from">
+                                            <div class="hour" style="white-space: nowrap" id="departDate">
+                                                {{this._doc.departTime.hour}}:{{this._doc.departTime.minute}}</div>
+                                            <div class="place">• {{this._doc.title}}</div>
+                                        </div>
+                                        <div class="duration">6h30m</div>
+                                        <div class="content to">
+                                            <div class="hour">{{this._doc.desTime}}</div>
+                                            <div class="place">• {{this._doc.to}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="TicketPC__FareInfo-sc-1mxgwjh-6 price">
+                                <div class="fare">
+                                    <div class="small"></div>
+                                    <h5 class="text-primary">Từ {{this._doc.price}} USD</h5>
+                                </div>
+                                <div></div>
+                            </div>
+                            <div class="TicketPC__DetailAndAction-sc-1mxgwjh-7 tripCard">
+                                {{#unless this._doc.availableBook}}
+                                <div class="seat-available text-danger">{{__ "out of seats"}}</div>
+                                {{else}}
+                                <div class="seat-available">{{this._doc.seats}} {{__ "available seats"}}</div>
+                                {{/unless}}
+                                <input style="width: 125px" readonly class="ant-btn btn-detail ant-btn-link"
+                                    value="{{this._doc.departDate}}" />
+                                <div class="action">
+                                    <button type="button" {{#unless this._doc.availableBook}}disabled{{/unless}}
+                                        class="ant-btn btn-booking collapsible " data-toggle="modal"
+                                        data-target=""><span
+                                            class="{{#unless this._doc.availableBook}}disable{{/unless}}"><a
+                                                href="/product/detail/{{this._doc._id}}">{{__ "Booking ticket"}}</a></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {{/each }}
+            {{/each}}
+        </div>
+        {{#if hiddenMore}}
+
+        {{else}}
+        <div class="flex-c-m flex-w w-full p-t-35 p-b-35">
+            <a href="/product/product-more" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                {{__ "Load More"}}
+            </a>
+        </div>
+        {{/if}}
+    </section>
+    {{/if}}
+</div>
+{{> footer}}
+{{!--  --}}
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.departChosen').chosen()
+        $('.destinaChosen').chosen()
+    })
+</script>
+<script>
+    var sliderLeft = document.getElementById("slider0to50");
+    var sliderRight = document.getElementById("slider51to100");
+    var inputMin = document.getElementById("min");
+    var inputMax = document.getElementById("max");
+
+    ///value updation from input to slider
+    //function input update to slider
+    function sliderLeftInput() {//input udate slider left
+        sliderLeft.value = inputMin.value;
+    }
+    function sliderRightInput() {//input update slider right
+        sliderRight.value = (inputMax.value);//chnage in input max updated in slider right
+    }
+
+    //calling function on change of inputs to update in slider
+    inputMin.addEventListener("change", sliderLeftInput);
+    inputMax.addEventListener("change", sliderRightInput);
+
+
+    ///value updation from slider to input
+    //functions to update from slider to inputs 
+    function inputMinSliderLeft() {//slider update inputs
+        inputMin.value = sliderLeft.value;
+    }
+    function inputMaxSliderRight() {//slider update inputs
+        inputMax.value = sliderRight.value;
+    }
+    sliderLeft.addEventListener("change", inputMinSliderLeft);
+    sliderRight.addEventListener("change", inputMaxSliderRight);
+</script>
+
+<script>
+    var sliderLeftSeat = document.getElementById("slider0to6");
+    var sliderRightSeat = document.getElementById("slider7to12");
+    var inputMinSeat = document.getElementById("minSeat");
+    var inputMaxSeat = document.getElementById("maxSeat");
+
+    ///value updation from input to slider
+    //function input update to slider
+    function sliderLeftSeatInput() {//input udate slider left
+        sliderLeftSeat.value = inputMinSeat.value;
+    }
+    function sliderRightSeatInput() {//input update slider right
+        sliderRightSeat.value = (inputMaxSeat.value);//chnage in input max updated in slider right
+    }
+
+    //calling function on change of inputs to update in slider
+    inputMinSeat.addEventListener("change", sliderLeftSeatInput);
+    inputMaxSeat.addEventListener("change", sliderRightSeatInput);
+
+
+    ///value updation from slider to input
+    //functions to update from slider to inputs 
+    function inputMinSliderSeatLeft() {//slider update inputs
+        inputMinSeat.value = sliderLeftSeat.value;
+    }
+    function inputMaxSliderSeatRight() {//slider update inputs
+        inputMaxSeat.value = sliderRightSeat.value;
+    }
+    sliderLeftSeat.addEventListener("change", inputMinSliderSeatLeft);
+    sliderRightSeat.addEventListener("change", inputMaxSliderSeatRight);
+</script>
+
+<script type="text/javascript">
+
+    var date = new Date();
+    date.setDate(date.getDate());
+
+    $('#departDate').datepicker({
+        startDate: date,
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>

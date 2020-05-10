@@ -1,0 +1,27 @@
+#body-wrapper-main {
+  margin-top: 40px;
+}
+.main-body {
+  display: block;
+  margin: auto;
+}
+.title {
+  padding-top: 30px;
+}
+
+/* .customdropdown {
+  color: black !important;
+  background-color: 
+  #dbdcdd !important;
+  width: 100% !important;
+  border: none !important;
+  padding: 10px !important
+  
+}
+.customdropdown:focus{
+    background-color: white !important;
+}
+.customdropdown option{
+    font-size: 15px !important;
+    font-family: 'Times New Roman', Times, serif !important
+} */

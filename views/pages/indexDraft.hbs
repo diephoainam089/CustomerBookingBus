@@ -1,0 +1,22 @@
+                    <div class="flex-c-m h-full p-r-25 bor6">
+                        <ul class="main-menu">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x"
+                                        style="color:rgb(59, 58, 58)" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    {{#if login}}
+                                    <a class="dropdown-item" href="/user/profile"><i class="fa fa-user-circle"
+                                            aria-hidden="true"></i> {{{__ "User Account"}}}</a>
+                                    <a class="dropdown-item" href="/user/logout"><i class="fa fa-sign-out"
+                                            aria-hidden="true"></i> {{{__ "Sign Out"}}}</a>
+                                    {{else}}
+                                    <a class="dropdown-item" href="/user/signin"><i class="fa fa-sign-in"
+                                            aria-hidden="true"></i> {{{__ "Sign In"}}} </a>
+                                    <a class="dropdown-item" href="/user/signup"><i class="fa fa-user-plus"
+                                            aria-hidden="true"></i> {{{__ "Sign Up"}}}</a>
+                                    {{/if}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>

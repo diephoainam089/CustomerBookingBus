@@ -1,0 +1,336 @@
+<head>
+    {{!-- checkout page --}}
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/style_checkout2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+
+{{>header}}
+{{!-- <section class="ftco-section" style="padding: 0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 ftco-animate">
+                <form action="/order/add-order" method="POST" class="billing-form">
+                    <h3 class="mb-4 billing-heading text-center">{{__ "Billing Details"}}</h3>
+                    {{#infoUser}}
+                    <div class="row align-items-end">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>{{__ "Full Name"}} ({{__ "Mr/Mrs"}}):</label>
+                                <h5>{{this.fullName}}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <h5>{{this.phoneNum}}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailaddress">Email Address:</label>
+                                <h5>{{this.email}}</h5>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="country">{{__ "Country"}}</label>
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="country" id="country" class="form-control" required>
+                                        <option value="France">France</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="South">South Korea</option>
+                                        <option value="United">United States</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Viet-Nam">Viet Nam</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="streetaddress">Street Address</label>
+                                <input id="address" name="address" type="text" class="form-control"
+                                    placeholder="Street name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input id="district" name="district" type="text" class="form-control"
+                                    placeholder="District" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="towncity">Town / City</label>
+                                <input id="city" name="city" type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="postcodezip">Postcode / ZIP *</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    {{/infoUser}}
+
+
+                    <div class="row mt-5 pt-3 d-flex">
+                        {{#if products}}
+                        <div class="col-md-6">
+                            <div class="cart-detail bg-light p-3 p-md-4">
+                                <h3 class="billing-heading mb-4">{{__ "Information cart"}}</h3>
+                                <div class="row" style="padding-bottom: 15px">
+                                    <div class="col-3" style="padding-left:25px">{{__ "Trip"}}</div>
+                                    <div class="col-3">{{__ "Type"}}</div>
+                                    <div class="col-3">{{__ "Quantity"}}</div>
+                                    <div class="col-3">{{__ "Total"}} (USD)</div>
+                                </div>
+                                {{#each products}}
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                {{this.item.title}}
+                                            </div>
+                                            <div class="col-3">
+                                                {{this.size}}
+                                            </div>
+                                            <div class="col-3">
+                                                {{this.qty}}
+                                            </div>
+                                            <div class="col-3" style="white-space: nowrap !important">
+                                                {{this.price}} vnd
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <div class="col-md-6 d-flex">
+                            <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                                <h3 class="billing-heading mb-4">{{__ "Cart Total"}}</h3>
+                                <p class="d-flex">
+                                    <span>{{__ "Subtotal"}}</span>
+                                    <span>{{total}} usd</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>{{__ "Discount"}}</span>
+                                    <span> {{discount}}</span>
+                                </p>
+                                <hr>
+                                <p class="d-flex total-price">
+                                    <span>{{__ "Total"}}</span>
+                                    {{#if totalDiscount}}
+                                    <span>{{totalDiscount}} USD</span>
+                                    {{else}}
+                                    <span>{{total}}.00 USD</span>
+                                    {{/if}}
+                                </p>
+                                <div class="text-center">
+                                    <p><button type="submit"
+                                            class="btn btn-outline-primary btn-lg">{{__ "Place an order"}}</button></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div> <!-- .col-md-8 -->
+        </div>
+    </div>
+</section> <!-- .section -->
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+            stroke="#F96D00" /></svg></div>
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery-migrate-3.0.1.min.js"></script>
+<script src="/javascripts/popper.min.js"></script> --}}
+{{!-- <script src="/javascripts/bootstrap.min.js"></script> --}}
+{{!-- <script src="/javascripts/jquery.easing.1.3.js"></script> --}}
+{{!-- <script src="/javascripts/jquery.waypoints.min.js"></script>
+<script src="/javascripts/jquery.stellar.min.js"></script>
+<script src="/javascripts/owl.carousel.min.js"></script>
+<script src="/javascripts/jquery.magnific-popup.min.js"></script>
+<script src="/javascripts/aos.js"></script> --}}
+{{!-- <script src="/javascripts/jquery.animateNumber.min.js"></script> --}}
+{{!-- <script src="/javascripts/bootstrap-datepicker.js"></script> --}}
+{{!-- <script src="/javascripts/scrollax.min.js"></script>
+<script src="/javascripts/main_checkout.js"></script> --}}
+<div class="" style="height: 100%">
+    <div class="modal clearfix">
+        <div class="modal-product">
+            {{#if products}}
+            <div class="product">
+
+                <!-- Slideshow container -->
+
+                {{#each products}}
+                <!-- Full-width images with number and caption text -->
+                <div class="productSlides">
+                    <img src="/images/{{this.item.imagePath}}"
+                        alt="IMG" style="width:100%; height: inherit;">
+                </div>
+                <br>
+
+                <div class="info row">
+                    <div class="col-md-12">
+                        <h3 class="route">
+                            {{this.item.title}} - {{this.item.to}}
+                        </h3>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="seats_info">
+                            {{__ "Seat's quantity"}}: {{this.qty}}
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="seats_info text-center">
+                            {{__ "Seat's code"}}: {{this.seatCode}}
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="total">
+                            <span>{{__ "Total"}}: ${{this.price}}</span>
+                        </p>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+                    <div class="col-md-4">
+                        <p class="seats_info">
+                            <span>{{__ "Subtotal"}}: ${{total}}</span>
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="seats_info text-center">
+                            <span>{{__ "Discount"}}</span>
+                            <span> {{discount}}</span>
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="total">
+                            {{#if totalDiscount}}
+                            <span>{{__ "Total"}}: ${{totalDiscount}}</span>
+                            {{else}}
+                            <span>{{__ "Total"}}: ${{total}}.00</span>
+                            {{/if}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="round-shape"></div>
+        </div>
+        <div class="modal-info">
+            <div class="info">
+                <h2>Payment Information</h2>
+                <form action="/order/add-order" method="POST">
+                    {{#infoUser}}
+                    <ul class="form-list">
+                        <li class="form-list-row row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>{{__ "Full Name"}} ({{__ "Mr/Mrs"}}):</label>
+                                    <input type="text" readonly value="{{this.fullName}}">
+                                </div>
+                            </div>
+                            <div class="col-4">
+
+                                <div class="form-group">
+                                    <label for="phone">Phone Number:</label>
+                                    <input type="text" readonly value="{{this.phoneNum}}">
+                                </div>
+                            </div>
+                            <div class="col-4">
+
+                                <div class="form-group">
+                                    <label for="phone">User email:</label>
+                                    <input type="text" readonly value="{{this.email}}">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="form-list-row row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="country">{{__ "Country"}}</label>
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="country" id="country" class="form-control" required>
+                                            <option value="France">France</option>
+                                            <option value="Italy">Italy</option>
+                                            <option value="Philippines">Philippines</option>
+                                            <option value="South">South Korea</option>
+                                            <option value="United">United States</option>
+                                            <option value="Japan">Japan</option>
+                                            <option value="Viet-Nam">Viet Nam</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="streetaddress">Street Address</label>
+                                    <input id="address" name="address" type="text" placeholder="Street name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="streetaddress">District</label>
+                                    <input id="district" name="district" type="text" placeholder="District" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="towncity">Town / City</label>
+                                    <input id="city" name="city" type="text" placeholder="" required>
+                                </div>
+                            </div>
+                        </li>
+                        {{/infoUser}}
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <button style="width: 90%" type="submit"
+                                class="btn btn-outline-primary btn-lg order_btn">{{__ "Place a ticket"}}</button>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="or">or</span>
+                        </div>
+                        </form>
+                        <div class="col-md-5">
+                                <form action="/order/pay" method="post">
+                                    <input class="btn btn-outline-primary btn-lg order_btn" type="submit" value="Paypal">
+                                </form>
+                        </div>
+
+                    </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{>footer}}
+
+{{!-- <script src="https://js.stripe.com/v3/"></script> --}}
+{{!-- <script src="src/javascripts/checkout.hbs"></script> --}}

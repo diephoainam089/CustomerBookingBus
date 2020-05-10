@@ -1,0 +1,29 @@
+
+.hMKwnH .header-content .ant-row ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 16px !important;
+  padding-inline-start: 0 !important;
+}
+
+.hMKwnH .header-content .ant-row ul li {
+  padding: 0 15px;
+}
+.hMKwnH .header-content .ant-row ul li:hover a {
+  text-decoration: none;
+  transition: ease-in-out 0.2s;
+}
+
+.WrapInUpBtn{
+    display: flex
+}
+
+.WrapInUpBtn .sisu{
+    padding: 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+

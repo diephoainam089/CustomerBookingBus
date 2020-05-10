@@ -1,0 +1,13 @@
+.gr-cnt{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: rgb(118, 118, 118);
+    padding: 6px 0px;
+
+}
+
+.gr-cnt a {
+    padding: 5px 0
+}

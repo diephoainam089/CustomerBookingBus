@@ -1,0 +1,32 @@
+.header-container {
+  width: auto;
+  height: auto;
+  background-color: white;
+}
+
+.hMKwnH {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  box-shadow:white
+}
+
+.hMKwnH .header-content {
+  padding: 0 15px !important;
+  width: 100% !important;
+}
+
+.hMKwnH .header-content .ant-row {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.header-v4 .container-menu-desktop{
+  height: 85px !important;
+}
+.wrap-menu-desktop{
+  top: 0 !important
+}

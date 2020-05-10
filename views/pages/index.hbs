@@ -1,0 +1,112 @@
+{{!-- <div class="flex-c-m h-full p-r-25 bor6">
+                        <ul class="main-menu">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x"
+                                        style="color:rgb(59, 58, 58)" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    {{#if login}}
+                                    <a class="dropdown-item" href="/user/profile"><i class="fa fa-user-circle"
+                                            aria-hidden="true"></i> {{{__ "User Account"}}}</a>
+                                    <a class="dropdown-item" href="/user/logout"><i class="fa fa-sign-out"
+                                            aria-hidden="true"></i> {{{__ "Sign Out"}}}</a>
+                                    {{else}}
+                                    <a class="dropdown-item" href="/user/signin"><i class="fa fa-sign-in"
+                                            aria-hidden="true"></i> {{{__ "Sign In"}}} </a>
+                                    <a class="dropdown-item" href="/user/signup"><i class="fa fa-user-plus"
+                                            aria-hidden="true"></i> {{{__ "Sign Up"}}}</a>
+                                    {{/if}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div> --}}
+
+<body>
+    {{> header}}
+    <div id='body-wrapper-booking' class='section'>
+        <div class='section-center'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <div class='booking-cta'>
+                            <h1>{{__ "Make Your Reservation"}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class='booking-form'>
+                    <form action="/product/product-search" method="post">
+                        <div class='row background'>
+                            <div class='col-md-3'>
+                                <div class="form-group inputNoIcon">
+                                    <select class="departChosen custom_input form-control" id="departure"
+                                        name="departure" required>
+                                        {{#each departures}}
+                                        <option value="{{this}}">{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-3'>
+                                <div class="form-group inputNoIcon">
+                                    <select class="destinaChosen custom_input_middle form-control" id="destination"
+                                        name="destination" required>
+                                        {{#each destinations}}
+                                        <option value="{{this}}">{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-3'>
+                                {{!-- <div id="datepicker" class="input-group date form-group" data-date-format="yyyy-mm-dd"> --}}
+                                {{!-- <input class="form-control departDate" id="departDate" name="departDate" readonly
+                                        type="text" data-provide="datepicker">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
+                                {{!-- </div> --}}
+                                <div class='form-group inputWithIcon'>
+                                    <input data-date-format="yyyy-mm-dd" id="departDate" name="departDate"
+                                        class='custom_input_middle form-control departDate' type='text'
+                                        placeholder='{{__ "Departure date"}}' value="" data-provide="datepicker"
+                                        readonly required />
+                                    <i class="fa fa-calendar icn"></i>
+                                </div>
+                            </div>
+                            <div class='col-md-3'>
+                                <div class='form-btn'>
+                                    <button type='submit' class='custom_btn_submit submit-btn'>
+                                        {{__ "Find tickets"}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- <script type="text/javascript">
+        function onFocus(ip) {
+            ip.type = 'date'
+
+        }
+        function onBlur(ip) {
+            ip.type = 'text'
+        }
+    </script> --}}
+    <script>
+        $(document).ready(function () {
+            $('.departChosen').chosen()
+            $('.destinaChosen').chosen()
+        })
+    </script>
+    <script type="text/javascript">
+
+        var date = new Date();
+        date.setDate(date.getDate());
+
+        $('#departDate').datepicker({
+            startDate: date,
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+</body>

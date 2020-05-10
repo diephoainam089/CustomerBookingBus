@@ -1,0 +1,184 @@
+{{>header}}
+
+<!-- breadcrumb -->
+<div class="container">
+	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+		<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+			{{__ "Home"}}
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a>
+
+		<span class="stext-109 cl4">
+			{{__ "Shoping Cart"}}
+		</span>
+	</div>
+</div>
+
+
+<!-- Shoping Cart -->
+<form class="bg0 p-t-75 p-b-85">
+	<div class="container">
+		{{#if products}}
+		<div class="row">
+			<div class="col-3 m-lr-30  m-b-30">
+				{{#each products}}
+				<a href="/product/detail/{{this.item._id}}" style="font-size: 25px; text-decoration: none">
+					<i class="fa fa-arrow-left" aria-hidden="true"></i>
+					{{__ "Continue"}}
+				</a>
+				{{/each}}
+			</div>
+			<div class="col-lg-12 m-lr-auto m-b-50">
+				<div class="m-l-25 m-r--38 m-lr-0-xl">
+					<div class="table-shopping-cart">
+						<table class="table-shopping-cart">
+							<tr class="table_head text-center">
+								<th class="column-3 ">{{__ "Image"}}</th>
+								<th class="column-4 text-center">{{__ "Description"}}</th>
+								<th class="column-3">{{__ "Region"}}</th>
+								<th class="column-3">{{__ "Price"}}</th>
+								<th class="column-3">{{__ "Quantity"}}</th>
+								<th class="column-3">{{__ "Seat's code"}}</th>
+								<th class="column-3">{{__ "Total"}}</th>
+								<th class="column-3">{{__ "Delete"}}</th>
+							</tr>
+							{{#each products}}
+							<tr class="table_row text-center">
+								<td class="column-3">
+									<div class="">
+										<img src="/images/{{this.item.imagePath}}" alt="IMG" width="100px">
+									</div>
+								</td>
+								<td class="column-4 text-center">{{this.item.title}} - {{this.item.to}}</td>
+								<td class="column-3">{{this.item.tripGroup}}</td>
+								<td class="column-3">{{this.item.price}}</td>
+								<td class="column-3">{{this.qty}}</td>
+								<td class="column-3">{{this.seatCode}}</td>
+								<td class="column-3">{{this.price}} USD</td>
+								<td class="column-3" style="padding-bottom:30px">
+									{{!-- <div class="dropdown">
+										<button type="button" class="btn btn-danger dropdown-toggle"
+											data-toggle="dropdown">
+											<i class="fa fa-close" aria-hidden="true"></i>
+										</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item"
+												href="/cart/reduceByOne/{{this.item._id}}_{{this.size}}">{{__ "Remove by 1"}}</a>
+											
+										</div>
+									</div> --}}
+									<a type="button" class="btn btn-outline-danger"
+										href="/cart/removeAll/{{this.item._id}}_{{this.size}}">{{__ "Remove all"}}</a>
+								</td>
+
+							</tr>
+							{{/each}}
+						</table>
+					</div>
+
+					<div class=" row bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+						<div class="col-md-12">
+							{{#if messages}}
+							<div class="alert alert-danger text-center">
+								<strong>{{messages}}</strong>
+							</div>
+							{{/if}}
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<form action="/cart/shopping-cart" method="get">
+									<div class="flex-w flex-m m-r-20 m-tb-5">
+										<input id="couponCode" name="couponCode"
+											class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+											placeholder="{{__ "Sale Code"}}" required>
+										<button class=" btn btn-outline-success">
+											{{__ "Apply"}}
+										</button>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-5">
+				<div class="m-l-25 m-r--38 m-lr-0-xl">
+					<h4 class="mtext-109 cl2 p-b-30">
+						{{__ "Total fee"}}
+					</h4>
+
+					<div class="flex-w flex-t bor12 p-b-13 form-group">
+						<div class="size-208">
+							<span class="stext-110 cl2">
+								{{__ "Subtotal"}}:
+							</span>
+						</div>
+
+						<div class="size-209">
+							<span class="mtext-110 cl2">
+								{{this.totalPrice}} USD
+							</span>
+						</div>
+
+					</div>
+					{{#if couponCodes}}
+					<div class="flex-w flex-t bor12 p-b-13 form-group">
+						<div class="size-208">
+							<span class="stext-110 cl2">
+								{{__ "Discount"}}:
+							</span>
+						</div>
+
+						<div class="size-209">
+							<span class="mtext-110 cl2">
+								{{couponCodes._doc.description}}
+							</span>
+						</div>
+					</div>
+					{{/if}}
+
+
+					<div class="flex-w flex-t p-t-27 p-b-33 form-group">
+						<div class="size-208">
+							<span class="mtext-101 cl2">
+								{{__ "Total cost"}}:
+							</span>
+						</div>
+
+						<div class="size-209 p-t-1">
+							<span class="mtext-110 cl2">
+								{{#if priceDiscount}}
+								{{this.priceDiscount}} USD
+								{{else}}
+								{{this.totalPrice}}
+								{{/if}}
+							</span>
+						</div>
+					</div>
+					<div class="wrapbtn text-center"></div>
+					<a href="/order/check-out" class="btn btn-outline-success btn-lg" style="width: 100%">
+						{{__ "Proceed to Checkout"}}
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	{{else}}
+	<div class="container-fluid text-center">
+		<h3 class="form-text text-muted text-center">
+			{{__ "No items in shopping cart."}}
+		</h3>
+		{{!-- <div class="offset-sm-2 col-sm-10">
+				<button type="submit" class="btn btn-danger">Back to Home Page</button>
+			</div> --}}
+	</div>
+
+	{{/if}}
+	</div>
+</form>
+
+{{>footer}}
