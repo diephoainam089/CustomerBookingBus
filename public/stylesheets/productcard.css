@@ -1,11 +1,10 @@
-.sortform{
-    display: flex;
-    flex-direction: row;
-    justify-content: center !important
-
+.sortform {
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
 }
-.filterform{
-    height: auto;
+.filterform {
+  height: auto;
 }
 .productcard {
   position: relative;
@@ -46,7 +45,7 @@
   align-items: center;
 }
 .tripContent .bus-info > div {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 .from-to {
   display: flex;
@@ -57,8 +56,8 @@
   font-size: 14px;
 }
 .tripContent .seat-type {
-    top: 34px;
-    position: absolute;
+  top: 34px;
+  position: absolute;
 }
 .tripContent .from-to .from-to-content {
   margin-left: 9px;
@@ -114,50 +113,47 @@
 }
 
 .tripCard .action .btn-detail {
-    color: rgb(0, 96, 196);
-    font-size: 16px;
-    height: 25px;
+  color: rgb(0, 96, 196);
+  font-size: 16px;
+  height: 25px;
 }
 .tripCard .action .btn-booking {
-    color: rgb(72, 72, 72);
-    font-weight: 500;
-    height: 35px;
-    background: rgb(255, 199, 0);
-    border-radius: 2px;
-    border-width: initial;
-    border-style: none;
-    border-color: initial;
-    border-image: initial;
-    padding: 8px 16px;
+  color: rgb(72, 72, 72);
+  font-weight: 500;
+  height: 35px;
+  background: rgb(255, 199, 0);
+  border-radius: 2px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  padding: 8px 16px;
 }
 
 .tripCard .seat-available {
-    text-align: right;
-    font-size: 16px;
-    color: rgb(72, 72, 72);
-    margin-bottom: 8px;
+  text-align: right;
+  font-size: 16px;
+  color: rgb(72, 72, 72);
+  margin-bottom: 8px;
 }
 
 .tripCard .action .btn-detail {
-    color: rgb(0, 96, 196);
-    font-size: 16px;
-    height: 25px;
-    padding-right: 10px  
+  color: rgb(0, 96, 196);
+  font-size: 16px;
+  height: 25px;
+  padding-right: 10px;
 }
-
-
-
 
 /* product detail */
-.priceDetail{
-  text-align: right
+.priceDetail {
+  text-align: right;
 }
 
-.noPadding{
+.noPadding {
   left: 25%;
 }
-.row--1{
-  padding: 0 27px !important
+.row--1 {
+  padding: 0 27px !important;
 }
 
 .tripCard .action {
@@ -165,19 +161,60 @@
   text-align: right;
 }
 
-.customBtn{
-  color: black !important 
+.customBtn {
+  color: black !important;
 }
 
 /* disable a tag */
-.disable{
+.disable {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.disable > a{
+.disable > a {
   color: currentColor;
-  display: inline-block;  /* For IE11/ MS Edge bug */
+  display: inline-block; /* For IE11/ MS Edge bug */
   pointer-events: none;
   text-decoration: none;
+}
+
+.tripContent .traveledDate {
+  top: 34px;
+  position: absolute;
+}
+.tripContent .traveledText {
+  top: 64px;
+  position: absolute;
+}
+
+.tripContent .traveledPrice {
+  top: 94px;
+  position: absolute;
+}
+.tripContent .traveledNote {
+  top: 124px;
+  position: absolute;
+}
+
+.tripContent .traveledCmt {
+  top: 154px;
+  position: absolute;
+}
+
+.traveledCard {
+  position: relative;
+  margin-bottom: 16px;
+  /* height: 210px; */
+  padding: 16px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
+}
+
+.traveledInput{
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px
 }

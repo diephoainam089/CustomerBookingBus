@@ -20,6 +20,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   if (req.session.oldUrl) {
     var oldUrl = req.session.oldUrl
     req.session.oldUrl = null
+    console.log(oldUrl)
     res.redirect(oldUrl)
   } else {
     res.redirect('./profile')
@@ -85,37 +86,38 @@ router.post('/viewDetail', checkAuthen.isLoggedIn, (req, res) => {
           orderList: []
         }
         if (user.orderList.length > 0) {
-        await user.orderList.forEach(s => {
-          if (s.number == Number(req.body.numberOrder)) {
-            obj.totalPrice = s.totalPrice
-            obj.orderDate = s.orderDate
-            s.sub_order.forEach(x => {
-              product.forEach(pro => {
-                if (x.proId == pro._id) {
-                  x.orderNumber.forEach(o => {
-                    pro.orderList.forEach(p => {
-                      if (o == p.numberOrder) {
-                        p.departure = pro.title
-                        p.destination = pro.to
-                        p.departDate = pro.departDate
-                        arrProduct.push(p) // view product detail
-                        // setup delete product
-                        var proDelete = {
-                          _id: pro._id,
-                          numberOrder: p.numberOrder
+          await user.orderList.forEach(s => {
+            if (s.number == Number(req.body.numberOrder)) {
+              obj.totalPrice = s.totalPrice
+              obj.orderDate = s.orderDate
+              s.sub_order.forEach(x => {
+                product.forEach(pro => {
+                  if (x.proId == pro._id) {
+                    x.orderNumber.forEach(o => {
+                      pro.orderList.forEach(p => {
+                        if (o == p.numberOrder) {
+                          p.departure = pro.title
+                          p.destination = pro.to
+                          p.departDate = pro.departDate
+                          p.codeBus = pro.codeBus
+                          arrProduct.push(p) // view product detail
+                          // setup delete product
+                          var proDelete = {
+                            _id: pro._id,
+                            numberOrder: p.numberOrder
+                          }
+                          arr_proDelet.push(proDelete)
                         }
-                        arr_proDelet.push(proDelete)
-                      }
+                      })
                     })
-                  })
-                }
+                  }
+                })
               })
-            })
-          }
-        })
-        obj.userInfo = await arrProduct[0].userInfo
-        obj.couponCode = await arrProduct[0].couponCode
-        obj.orderList = await arrProduct
+            }
+          })
+          obj.userInfo = await arrProduct[0].userInfo
+          obj.couponCode = await arrProduct[0].couponCode
+          obj.orderList = await arrProduct
         }
         await res.render('user/orderDetail', {
           orderDetail: obj,
@@ -147,6 +149,94 @@ router.post('/deleteOrder', async (req, res) => {
     )
   })
   res.redirect('./profile')
+})
+
+router.get('/traveled-trip', checkAuthen.isLoggedIn, async (req, res) => {
+  var user = req.session.user
+  // console.log(user)
+
+  // Product.find(async (err, trips) => {
+  //   // console.log(trips, 'Mảng')
+  //   let userTrips = []
+  //   trips.forEach(async trip => {
+  //     var userTrip = trip.orderList.filter(o => o.userInfo.email == user.email)
+  //     userTrips = userTrips.concat(userTrip)
+  //   })
+  //   console.log(userTrips)
+  //   await res.render('user/traveledTrip', {
+  //     traveled: 'Hello'
+  //   })
+  // })
+
+  User.findOne(
+    {
+      email: user.email
+    },
+    (err, doc) => {
+      var birthday = ''
+      if (doc.birthday != null) {
+        birthday = doc.birthday.toISOString().slice(0, 10)
+      }
+      Product.find((err, pro) => {
+        var userTrips = []
+        var userTrips_valid = []
+        doc.orderList.forEach(s => {
+          // var check = true
+          s.sub_order.forEach(x => {
+            pro.forEach(p => {
+              if (x.proId == p._id) {
+                p.orderList.forEach(o => {
+                  x.orderNumber.forEach(ord => {
+                    if (
+                      (ord == o.numberOrder && o.status === 1 )  
+                    ) {
+                    var obj_orders = {}
+                      obj_orders.orderDate = s.orderDate
+                      obj_orders.number = s.number
+                      obj_orders.tripId = p._id
+                      obj_orders.title = p.title
+                      obj_orders.to = p.to
+                      obj_orders.image = p.imagePath
+                      obj_orders.codeBus = p.codeBus
+                      obj_orders.departDate = p.departDate
+                      obj_orders.departHour = p.departTime.hour 
+                      obj_orders.departMinute = p.departTime.minute 
+                      obj_orders.quantity = o.seats.length
+                      obj_orders.seatCode = o.seats
+                      obj_orders.price = o.totalHasDiscount
+                      obj_orders.email = doc.email
+                      userTrips.push(obj_orders)
+                      var dataNow = new Date()
+                      userTrips_valid = userTrips.filter(
+                        t =>
+                          Number(dataNow.getDate()) -
+                            Number(t.departDate.toISOString().slice(8, 10)) <=
+                          4
+                      )
+                    }
+                    // if (check == true) {
+                    //   // setup view order list by date
+                      
+                    //   // end setup view order list by date
+                    //   // console.log(Number(Date.now()) - Number(.departDate));
+                    //   console.log(userTrips);
+                    //   // console.log(userTrips_valid, 'aaaa')
+                    //   // console.log(dataNow.getDate()) 
+                    // }
+                  })
+                })
+              }
+            })
+          })
+        })
+        res.render('user/traveledTrip', {
+          users: doc,
+          orderList: userTrips_valid,
+          birthday: birthday
+        })
+      })
+    }
+  )
 })
 
 router.use(csurfProtection)

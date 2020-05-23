@@ -1,0 +1,63 @@
+{{>header}}
+<div class="content">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                {{#if orderList}}
+                <div class="m-t-20 card-header-primary text-center">
+                    <h4 class="card-title mt-0">List of traveled trips </h4>
+                </div>
+            </div>
+                {{#each orderList}}
+                <div id="ticket-v2CPGqCRCusAkaAjIzIgIxNTCqjaIBOgoyOS0wMi0yMDIwSB1QyQM"
+                    class="TicketWrapper__TicketContainer-unfwwx-0 productcard">
+                    <div class="TicketPC__Container-sc-1mxgwjh-0 eelEoa">
+                        <div class="ticket TicketPC__BodyFlex-sc-1mxgwjh-1 productcontainer">
+                            <img class="image" src="../images/{{this.image}}" />
+                            <div class="TicketPC__RightBody-sc-1mxgwjh-3 productinfo">
+                                <div class="TicketPC__TripInfo-sc-1mxgwjh-5 tripContent">
+                                    <div class="bus-info">
+                                        <div class="bus-name">{{__ "The trip has been departing from"}}
+                                            <strong>{{this.title}}</strong> {{__ "to"}} <strong>{{this.to}}</strong>
+                                        </div>
+                                        <div class="bus-review">• {{this._doc.reviews.length}} {{__ "reviews"}}</div>
+                                    </div>
+                                    <div class="traveledDate">{{__ "The trip departed at"}}
+                                        <strong> {{this.departHour}}:{{this.departMinute}}</strong> {{__ "on"}} <strong>
+                                            {{this.departDate}}</strong> {{__ "with the bus code is"}}
+                                        <strong>{{this.codeBus}}</strong></div>
+                                    <div class="traveledText">{{__ "You have reserved"}}
+                                        <strong>{{this.quantity}}</strong> {{__ "seats for the trip"}}
+                                        {{__ "includes seats:"}}<strong> {{this.seatCode}}</strong></div>
+                                    <div class="traveledPrice">{{__ "The amount you paid for the trip was"}}
+                                        <strong>${{this.price}}</strong></div>
+                                    <div class="traveledNote text-danger">
+                                        <a class="btn btn-primary btn-sm" type="button"
+                                            href="http://localhost:3000/product/detail/{{this.tripId}}">View and add
+                                            comment</a></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+            {{else}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title text-center">{{__ "You have not had any recent trips"}}</div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <img class="image-not-found"
+                            src="https://storage.googleapis.com/fe-production/images/route-no-schedule.png"
+                            alt="route-not-found">
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+</div>
+{{>footer}}

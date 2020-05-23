@@ -6,14 +6,13 @@
             <div class="col-md-10">
                 <div class="card bg-light">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title font-weight-bold text-center">Order Detail</h4>
-                        <p class="card-category text-center">View all information in Order</p>
+                        <h4 class="card-title font-weight-bold text-center">Ticket Detail</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="font-weight-bold">Order Date:</label>
+                                    <label class="font-weight-bold">Booking Date:</label>
                                     <h5>{{orderDetail.orderDate}}</h5>
                                 </div>
                             </div>
@@ -40,21 +39,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Seat's quantity: {{this.totalQuantity}}</label>
 
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Seat's code: {{this.seats}}</label>
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Total price: {{this.totalPrice}} USD</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Bus ID: {{this.codeBus}}</label>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +74,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="bmd-label-floating">Email: 
+                                    <label class="bmd-label-floating">Email:
                                         {{orderDetail.userInfo.email}}</label>
                                 </div>
                             </div>
@@ -83,7 +88,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        {{!-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Address user:
@@ -92,7 +97,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-md-6 d-flex justify-content-end">
                                 <div class="form-group">

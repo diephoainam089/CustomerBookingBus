@@ -254,6 +254,7 @@ router.get('/:id', async (req, res, next) => {
   let tripArr = req.app.locals.SortTripArr
   let tripChunks = []
   let sorted_Arr = []
+  let hiddenMore = true
   for (let i = 0; i < tripArr.length; i++) {
     if (key == 'increaseP') {
       await tripArr[i].sort((a, b) => {
@@ -265,28 +266,27 @@ router.get('/:id', async (req, res, next) => {
         return b.price - a.price
       })
     }
-    if(key == 'earliest'){
-      await tripArr[i].sort((a,b) =>{
-         if(a.departTime.hour !== b.departTime.hour){
-           if(a.departTime.hour < b.departTime.hour) return -1
-           if(a.departTime.hour > b.departTime.hour) return 1
-         }else{
-           if(a.departTime.minute < b.departTime.minute) return -1
-           if(a.departTime.minute > b.departTime.minute) return 1
-         }
-
+    if (key == 'earliest') {
+      await tripArr[i].sort((a, b) => {
+        if (a.departTime.hour !== b.departTime.hour) {
+          if (a.departTime.hour < b.departTime.hour) return -1
+          if (a.departTime.hour > b.departTime.hour) return 1
+        } else {
+          if (a.departTime.minute < b.departTime.minute) return -1
+          if (a.departTime.minute > b.departTime.minute) return 1
+        }
       })
     }
-        if(key == 'latest'){
-      await tripArr[i].sort((a,b) =>{
-         if(a.departTime.hour !== b.departTime.hour){
-           if(a.departTime.hour < b.departTime.hour) return 1
-           if(a.departTime.hour > b.departTime.hour) return -1
-         }else{
-           if(a.departTime.minute < b.departTime.minute) return 1
-           if(a.departTime.minute > b.departTime.minute) return -1
-         }
-         return 0
+    if (key == 'latest') {
+      await tripArr[i].sort((a, b) => {
+        if (a.departTime.hour !== b.departTime.hour) {
+          if (a.departTime.hour < b.departTime.hour) return 1
+          if (a.departTime.hour > b.departTime.hour) return -1
+        } else {
+          if (a.departTime.minute < b.departTime.minute) return 1
+          if (a.departTime.minute > b.departTime.minute) return -1
+        }
+        return 0
       })
     }
     sorted_Arr.push(tripArr[i])
@@ -296,7 +296,8 @@ router.get('/:id', async (req, res, next) => {
   req.app.locals.FilterTripArr = sorted_Arr
 
   res.render('product/productList', {
-    products: sorted_Arr
+    products: sorted_Arr,
+    hiddenMore: hiddenMore
   })
 })
 
@@ -490,5 +491,7 @@ router.post('/review-product/:id', async (req, res) => {
   })
   res.redirect('../detail/' + id)
 })
+
+
 
 module.exports = router

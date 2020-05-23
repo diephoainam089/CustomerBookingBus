@@ -138,5 +138,22 @@
 	"reviewed on": "reviewed on",
 	"Filter by available seat": "Filter by available seat",
 	"Pending ticket list": "Pending ticket list",
-	"Language": "Language"
+	"Language": "Language",
+	"The trips have gone": "The trips have gone",
+	"The trip has been departing from": "The trip has been departing from",
+	"The bus has the identification code is": "The bus has the identification code is",
+	"The bus departs at": "The bus departs at",
+	"on": "on",
+	"with the bus code is": "with the bus code is",
+	"The tus departs at": "The tus departs at",
+	"The trip departs at": "The trip departs at",
+	"The trip departed at": "The trip departed at",
+	"You have reserved": "You have reserved",
+	"seats": "seats",
+	"includes seats:": "includes seats:",
+	"seats for the trip": "seats for the trip",
+	"The amount you paid for the trip was": "The amount you paid for the trip was",
+	"You have not had any recent trips": "You have not had any recent trips",
+	"You can comment on the last trip within 4 days of departure": "You can comment on the last trip within 4 days of departure",
+	"You can comment on this trip within 4 days of departure": "You can comment on this trip within 4 days of departure"
 }

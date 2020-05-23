@@ -16,7 +16,7 @@ passport.use(new GoogleStrategy({
     callbackURL: '/user/google/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret
-}, (acessToken, refreshToken,profile,done) => {
+}, (accessToken, refreshToken,profile,done) => {
     User.findOne({googleId: profile.id}).then((currentUser)=>{
         if(currentUser){
             // console.log('user is:',currentUser)

@@ -196,6 +196,7 @@ router.get('/success', async (req, res) => {
         totalPrice: trip[0].price,
         Size: trip[0].size,
         seats: trip[0].seatCode,
+        departDate: trip[0].item.departDate,
         couponCode: cart.coupons,
         totalHasDiscount: profit, // change cart.totalDiscount
         statusShip: 'Not yet',
@@ -264,7 +265,9 @@ router.get('/success', async (req, res) => {
             <td>${trip[0].item.title}</td>
             <td>${trip[0].item.to}</td>
             <td>${trip[0].item.departDate}</td>
-            <td>${trip[0].item.departTime}</td>
+            <td>${trip[0].item.departTime.hour}:${
+            trip[0].item.departTime.minute
+          }</td>
             <td>${trip[0].qty}</td>
             <td>${trip[0].seatCode}</td>
             <td>${trip[0].item.codeBus}</td>
@@ -273,7 +276,10 @@ router.get('/success', async (req, res) => {
           </tr>
           </tbody></table>
           </br>
-          <h3>Total:$ ${cart.totalDiscount}</h3>`
+          <h3>Total: $${cart.totalDiscount}</h3>
+          <h4>When the trip is over, you can comment and rate the trip at the link: http://localhost:3000/product/detail/${
+            trip[0].item._id
+          }</h4>`
         }
       )
       await User.findOneAndUpdate(
@@ -313,6 +319,7 @@ router.post('/add-order', async function (req, res, next) {
   var cartArr = cart.generateArray() // parse to cart to array
   console.log(cartArr)
   // create table for information table
+  let noteMessage = `<h4>When the trip is over, you can comment and rate the trip at the link:`
   let infoTrip = `<table class="table">
   <thead>
   <tr>
@@ -402,6 +409,7 @@ router.post('/add-order', async function (req, res, next) {
       totalPrice: cartArr[i].price,
       Size: cartArr[i].size,
       seats: cartArr[i].seatCode,
+      departDate: cartArr[i].item.departDate,
       couponCode: cart.coupons,
       totalHasDiscount: profit, // change cart.totalDiscount
       statusShip: 'Not yet',
@@ -434,7 +442,7 @@ router.post('/add-order', async function (req, res, next) {
       async (err, doc) => {
         // create object to add sub_order each product id
         if (doc) {
-          console.log(doc, 'Đây là doc')
+          // console.log(doc, 'Đây là doc')
           if (arrNum_order.length != 0) {
             var check = true
             await arrNum_order.forEach(s => {
@@ -446,6 +454,7 @@ router.post('/add-order', async function (req, res, next) {
             if (check == true) {
               var obj = {
                 proId: cartArr[i].item._id,
+                tripDate: cartArr[i].item.departDate,
                 orderNumber: []
               }
               await obj.orderNumber.push(orderItem.numberOrder)
@@ -454,6 +463,7 @@ router.post('/add-order', async function (req, res, next) {
           } else {
             var obj = {
               proId: cartArr[i].item._id,
+              tripDate: cartArr[i].item.departDate,
               orderNumber: []
             }
             await obj.orderNumber.push(orderItem.numberOrder)
@@ -469,13 +479,16 @@ router.post('/add-order', async function (req, res, next) {
           <td>${cartArr[i].item.title}</td>
           <td>${cartArr[i].item.to}</td>
           <td>${cartArr[i].item.departDate}</td>
-          <td>${cartArr[i].item.departTime}</td>
+          <td>${cartArr[i].item.departTime.hour}:${
+          cartArr[i].item.departTime.minute
+        }</td>
           <td>${cartArr[i].qty}</td>
           <td>${cartArr[i].seatCode}</td>
           <td>${cartArr[i].item.codeBus}</td>
           <td>${cartArr[i].item.price}</td>
           <td>${cartArr[i].qty * cartArr[i].item.price}</td>
         </tr>`
+        noteMessage += ` http://localhost:3000/product/detail/${cartArr[i].item._id}</h4>`
       }
     )
   }
@@ -516,7 +529,8 @@ router.post('/add-order', async function (req, res, next) {
 `) +
     infoTrip +
     `</tbody></table>` +
-    `<h3>Total:$ ${cart.totalDiscount}.00</h3>`
+    `<h3>Total:$ ${cart.totalDiscount}.00</h3>` +
+    noteMessage
   // end send information to mail
 
   await sendMail(output, 'Customer Order', user.email)

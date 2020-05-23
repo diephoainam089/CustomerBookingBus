@@ -242,8 +242,8 @@ var newTrips = [
   //     totalProfit: 0
   // }),
   new Product({
-    imagePath: 'product-01.jpg',
-    title: 'An Giang',
+    imagePath: 'BUS_1.png',
+    title: 'Vũng Tàu',
     to: 'Sài Gòn',
     departTime: { hour: '22', minute: '00' },
     codeBus: 'BUS_12',
@@ -258,14 +258,14 @@ var newTrips = [
     totalProfit: 0
   }),
   new Product({
-    imagePath: 'product-01.jpg',
-    title: 'Hà Nội',
-    to: 'Huế',
-    departTime: { hour: '22', minute: '30' },
+    imagePath: 'BUS_2.jpg',
+    title: 'Sài Gòn',
+    to: 'Vũng Tàu',
+    departTime: { hour: '13', minute: '30' },
     codeBus: 'BUS_10',
     description: 'Tài xế vui vẻ, hòa đồng, không ngủ gật',
     tripGroup: 'northern',
-    price: 15,
+    price: 5,
     seats: 12,
     seatIsBooked: [],
     reviews: [],
@@ -274,7 +274,7 @@ var newTrips = [
     totalProfit: 0
   }),
   new Product({
-    imagePath: 'product-01.jpg',
+    imagePath: 'BUS_3.jpg',
     title: 'Sài Gòn',
     to: 'Đà Lạt',
     departTime: { hour: '21', minute: '00' },
@@ -290,9 +290,9 @@ var newTrips = [
     totalProfit: 0
   }),
   new Product({
-    imagePath: 'product-02.jpg',
-    title: 'Sài Gòn',
-    to: 'Nha Trang',
+    imagePath: 'BUS_4.png',
+    title: 'Đà Lạt',
+    to: 'Sài Gòn',
     departTime: { hour: '24', minute: '00' },
     codeBus: 'BUS_02',
     description: 'Tài xế vui vẻ, hòa đồng, không ngủ gật',
@@ -304,23 +304,23 @@ var newTrips = [
     orderList: [],
     productRate: 0,
     totalProfit: 0
-  }),
-  new Product({
-    imagePath: 'product-03.jpg',
-    title: 'Sài Gòn',
-    to: 'Quảng Nam',
-    departTime: { hour: '20', minute: '30' },
-    codeBus: 'BUS_03',
-    description: 'Tài xế vui vẻ, hòa đồng, không ngủ gật',
-    tripGroup: 'central',
-    price: 17,
-    seats: 12,
-    seatIsBooked: [],
-    reviews: [],
-    orderList: [],
-    productRate: 0,
-    totalProfit: 0
   })
+  // new Product({
+  //   imagePath: 'product-03.jpg',
+  //   title: 'Sài Gòn',
+  //   to: 'Quảng Nam',
+  //   departTime: { hour: '20', minute: '30' },
+  //   codeBus: 'BUS_03',
+  //   description: 'Tài xế vui vẻ, hòa đồng, không ngủ gật',
+  //   tripGroup: 'central',
+  //   price: 17,
+  //   seats: 12,
+  //   seatIsBooked: [],
+  //   reviews: [],
+  //   orderList: [],
+  //   productRate: 0,
+  //   totalProfit: 0
+  // })
 ]
 var done = 0
 for (var i = 0; i < newTrips.length; i++) {
